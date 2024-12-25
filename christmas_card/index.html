@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Bunny - Christmas Card</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #001f3f, #1a1a2e);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ffcccb;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+    .hearts, .snowflakes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    audio {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>To Bunny</h1>
+    <p>Not a red rose or a satin heart.<br>
+       I give you an onion.<br>
+       It is a moon wrapped in brown paper.<br>
+       It promises light<br>
+       like the careful undressing of love.<br>
+       圣诞快乐，小兔子<br>
+       ps：考试结束要犒劳一下自己哦</p>
+  </div>
+  <div class="hearts"></div>
+  <div class="snowflakes"></div>
+  <audio controls autoplay loop>
+    <source src="harvest-moon.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Create floating hearts
+    const heartsContainer = document.querySelector('.hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.style.position = 'absolute';
+      heart.style.width = '20px';
+      heart.style.height = '20px';
+      heart.style.background = 'red';
+      heart.style.borderRadius = '50%';
+      heart.style.top = `${Math.random() * 100}%`;
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.opacity = Math.random();
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+    setInterval(createHeart, 200);
+
+    // Create snowflakes
+    const snowflakesContainer = document.querySelector('.snowflakes');
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.style.position = 'absolute';
+      snowflake.style.width = '10px';
+      snowflake.style.height = '10px';
+      snowflake.style.background = 'white';
+      snowflake.style.borderRadius = '50%';
+      snowflake.style.top = `-10px`;
+      snowflake.style.left = `${Math.random() * 100}%`;
+      snowflake.style.animation = `fall ${Math.random() * 5 + 5}s linear infinite`;
+      snowflakesContainer.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 10000);
+    }
+    setInterval(createSnowflake, 300);
+
+    // Add falling animation for snowflakes
+    const styleSheet = document.createElement('style');
+    styleSheet.type = 'text/css';
+    styleSheet.innerText = `
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  </script>
+</body>
+</html>
